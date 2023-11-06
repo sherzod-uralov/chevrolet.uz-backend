@@ -1,0 +1,72 @@
+type User {
+    id:ID
+    username:String
+    password:String
+    isAdmin:Boolean
+}
+
+type authorization {
+    msg:String,
+    isAdmin:Boolean,
+    status:Int
+}
+
+type Query {
+    users:[User]
+}
+
+
+
+input loginInput {
+    username:String
+    password:String
+}
+
+type login {
+    msg:String,
+    token:String,
+    logined:Boolean
+}
+
+input registerInput {
+    username:String
+    password:String
+    checkpassword:String
+}
+
+type register {
+    msg:String
+    token:String
+    registered:Boolean
+    user:String
+}
+
+input update {
+    id:ID
+    username:String
+}
+
+type sendUser {
+    id:ID
+    oldUserName:String
+    newUserName:String
+}
+
+type Response {
+    msg: String
+    status: Int
+    data: any
+}
+
+type Mutation {
+    login(input:loginInput):login!
+    register(input:registerInput):register!
+    profileUpload(file:Upload!,id:ID):Response!
+    deleteUser(id:ID!):User!
+    updateUser(updateInput:update):sendUser!
+    addAdmin(id:ID):Response!
+    
+}
+
+scalar any
+scalar Upload

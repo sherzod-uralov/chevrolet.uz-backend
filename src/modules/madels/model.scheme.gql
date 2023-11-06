@@ -1,0 +1,58 @@
+scalar Upload
+scalar any
+
+type models {
+    model_id: ID
+    name: String 
+    toning: Boolean 
+    engine: Float
+    year: String
+    color: String
+    distance: Int
+    gearbook: Int
+    inside_image: String
+    outside_image: String
+    model_type_image: String
+    price: Float
+    category_id: Int
+}
+
+input ModelInput {
+    name: String
+    toning: Boolean
+    engine: Float
+    year: String
+    color: String
+    distance: Int
+    gearbook: Int
+    price: Float
+    category_id: Int
+}
+
+input UpdateInput {
+    toning: Boolean
+    name: String
+    engine: Float
+    year: String
+    color: String
+    distance: Int
+    gearbook: Int
+    price: Float
+}
+
+type Query {
+    models: [models]
+}
+
+type Response {
+    msg: String
+    status: Int
+    data: any
+}
+
+type Mutation {
+    createCar(input: ModelInput!, files: [Upload]): Response
+    updateCar(input: UpdateInput!, id: ID, files: [Upload]): Response
+    deleteCar(id: ID!): Response
+    carPagination(limit:Int,offset:Int):Response
+}

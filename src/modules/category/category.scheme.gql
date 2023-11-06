@@ -1,0 +1,37 @@
+scalar Upload
+scalar any
+
+type Category {
+    category_id: ID
+    category_name: String
+    category_image: String
+    models: [models]
+}
+
+input CategoryInput {
+    category_name: String
+    category_image: Upload
+}
+
+input UpdateInput {
+    category_id: Int
+    category_name: String
+    category_image: Upload
+}
+
+type Query {
+    category: [Category]
+}
+
+type Response {
+    msg: String
+    status: Int
+    data: any
+}
+
+type Mutation {
+    creatCategory(input: CategoryInput, file: Upload): Response
+    updateCategory(input: CategoryInput, file: Upload): Response
+    deleteCategory(id: ID): Response
+    categoryPagination(limit:Int,offset:Int):Response
+}
